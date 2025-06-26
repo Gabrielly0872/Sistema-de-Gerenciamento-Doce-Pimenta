@@ -20,10 +20,12 @@ public class FrmEstoque extends javax.swing.JFrame {
     /**
      * Creates new form FrmEstoque
      */
-    public FrmEstoque() {
-        initComponents();
-        listarValoresProduto();
-    }
+public FrmEstoque() {
+    initComponents();              // Inicializa os componentes do NetBeans
+    listarValoresProduto();        // Preenche a JTable com os dados
+    configurarMouseListener();     // Adiciona o clique nos emojis
+}
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -43,15 +45,22 @@ public class FrmEstoque extends javax.swing.JFrame {
         btnBuscar1 = new javax.swing.JButton();
         btnAtualizar = new javax.swing.JButton();
         btnNovoProduto = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        tabelaEstoque.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        tabelaEstoque.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14)); // NOI18N
         tabelaEstoque.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -63,12 +72,17 @@ public class FrmEstoque extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tabelaEstoque);
 
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 745, 368));
+
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 102, 102));
         jLabel1.setText("Estoque de Produtos");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 20, 401, -1));
+        jPanel1.add(txtFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 606, 33));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("FILTRAR: ");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
 
         btnBuscar1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnBuscar1.setText("Buscar");
@@ -77,6 +91,7 @@ public class FrmEstoque extends javax.swing.JFrame {
                 btnBuscar1ActionPerformed(evt);
             }
         });
+        jPanel1.add(btnBuscar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 110, 87, 22));
 
         btnAtualizar.setText("Atualizar");
         btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
@@ -84,6 +99,7 @@ public class FrmEstoque extends javax.swing.JFrame {
                 btnAtualizarActionPerformed(evt);
             }
         });
+        jPanel1.add(btnAtualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 150, 87, -1));
 
         btnNovoProduto.setText("Novo Produto");
         btnNovoProduto.addActionListener(new java.awt.event.ActionListener() {
@@ -91,50 +107,22 @@ public class FrmEstoque extends javax.swing.JFrame {
                 btnNovoProdutoActionPerformed(evt);
             }
         });
+        jPanel1.add(btnNovoProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(68, 143, -1, -1));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(203, 203, 203))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(68, 68, 68)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnNovoProduto)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 606, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnBuscar1, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
-                            .addComponent(btnAtualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(0, 85, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel1)
-                .addGap(34, 34, 34)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtFiltro)
-                    .addComponent(btnBuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAtualizar)
-                    .addComponent(btnNovoProduto))
-                .addGap(21, 21, 21)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22))
-        );
+        jButton1.setFont(new java.awt.Font("Segoe UI Emoji", 0, 12)); // NOI18N
+        jButton1.setText("🗑️");
+        jButton1.setBorder(null);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 220, 20, 20));
+
+        jButton2.setFont(new java.awt.Font("Segoe UI Emoji", 0, 12)); // NOI18N
+        jButton2.setText("✏");
+        jButton2.setBorder(null);
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 220, 20, 20));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-40, 0, 920, 620));
 
@@ -152,6 +140,10 @@ public class FrmEstoque extends javax.swing.JFrame {
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAtualizarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -192,6 +184,8 @@ public class FrmEstoque extends javax.swing.JFrame {
     private javax.swing.JButton btnAtualizar;
     private javax.swing.JButton btnBuscar1;
     private javax.swing.JButton btnNovoProduto;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
@@ -230,6 +224,10 @@ public class FrmEstoque extends javax.swing.JFrame {
         
             JOptionPane.showMessageDialog(null, "Listar Valores VIEW: " + e);
         }
+    }
+
+    private void configurarMouseListener() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }
